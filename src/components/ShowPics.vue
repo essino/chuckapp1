@@ -11,9 +11,9 @@
             </thead>
             <tbody>
             <tr v-for="pic in pics" :key="pic.id">
-                <td>{{ pics.link }}</td>
-                <!--<td>{{ pics.class }}</td>
-                <td>{{ pics.id }}</td>-->
+                <td>{{ pic.id }}</td>
+                <td>{{ pic.name }}</td>
+                <td>{{ pic.address }}</td>
             </tr>
             </tbody>
         </table>
@@ -30,14 +30,14 @@
                 pics: [],
                 pic: {
                     id: '',
-                    link: '',
-                    class: ''
+                    name: '',
+                    address: ''
                 }
             }
         },
         async created() {
             try {
-                const promise = await axios.get('http://localhost:8081/test')
+                const promise = await axios.get('http://localhost:4000/')
                 //const promise = await axios.get('https://my-json-server.typicode.com/essino/fakedb/events1');
                 this.pics = promise.data;
 

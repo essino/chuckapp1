@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "node db.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -17,9 +18,6 @@
     "mysql": "^2.18.1",
     "vue": "^2.6.11",
     "vue-router": "^3.4.5"
-  },
-  "scripts": {
-    "start": "node db.js"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
