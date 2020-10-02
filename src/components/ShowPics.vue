@@ -14,6 +14,8 @@
                 <td>{{ pic.id }}</td>
                 <td>{{ pic.name }}</td>
                 <td>{{ pic.address }}</td>
+                <td><img :src="pic.address"/></td>
+
             </tr>
             </tbody>
         </table>
@@ -37,7 +39,7 @@
         },
         async created() {
             try {
-                const promise = await axios.get('http://localhost:4000/')
+                const promise = await axios.get('http://localhost:4000/items/')
                 //const promise = await axios.get('https://my-json-server.typicode.com/essino/fakedb/events1');
                 this.pics = promise.data;
 

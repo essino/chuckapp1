@@ -2,6 +2,9 @@
 const express = require("express");
 const server = express();
 
+const cors = require('cors');
+server.use(cors());
+
 const body_parser = require("body-parser");
 
 // parse JSON (application/json content-type)
@@ -23,6 +26,14 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
     });
 
     // << db CRUD routes >>
+    server.get("/items", (request, response) => {
+        // return updated list
+        dbCollection.find().toArray((error, result) => {
+            if (error) throw error;
+            response.json(result);
+            console.log(result);
+        });
+    });
 
 }, function(err) { // failureCallback
     throw (err);
