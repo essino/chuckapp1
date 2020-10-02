@@ -20,14 +20,18 @@
                 <input v-model="name" type="text" />
                 <label>Address</label>
                 <input v-model="address" type="text" />
+              <td><img :src="address"/></td>
                 <button>Add Pic</button>
             </form>
         </div>
     </div>
 </template>
 
+
+
 <script>
     import axios from 'axios';
+
 
     export default {
         name: "AddPics",
