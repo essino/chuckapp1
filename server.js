@@ -25,19 +25,42 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         console.log(result);
     });
 
-    // << db CRUD routes >>
+    server.post("/items", (request, response) => {
+        const item = request.body;
+        dbCollection.insertOne(item, (error, result) => { // callback of insertOne
+            if (error) throw error;
+            // return updated list
+            dbCollection.find().toArray((_error, _result) => { // callback of find
+                if (_error) throw _error;
+                response.json(_result);
+            });
+        });
+    });
+
+    server.get("/items/:name", (request, response) => {
+        const itemName = request.params.name;
+
+        dbCollection.findOne({ id: itemName }, (error, result) => {
+            if (error) throw error;
+            // return item
+            response.json(result);
+        });
+    });
+
     server.get("/items", (request, response) => {
         // return updated list
         dbCollection.find().toArray((error, result) => {
             if (error) throw error;
             response.json(result);
-            console.log(result);
         });
     });
+
 
 }, function(err) { // failureCallback
     throw (err);
 });
+
+
 
 
 server.listen(port, () => {
