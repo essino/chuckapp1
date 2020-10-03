@@ -37,15 +37,41 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
+    //findOne tuntuu toimivan vain int-muotoisella parametrilla
+    /*server.get("/items/:id", (request, response) => {
+        const itemId = request.params.id;
+        console.log(itemId);
+        let sameId = parseInt(itemId);
+        dbCollection.findOne({ id: sameId }, (error, result) => {
+            if (error) throw error;
+            // return item
+            response.json(result);
+        });
+    });*/
+
+    //ei toimi, siksikö, että on nimi on string?
     server.get("/items/:name", (request, response) => {
         const itemName = request.params.name;
-
-        dbCollection.findOne({ id: itemName }, (error, result) => {
+        console.log(itemName);
+        dbCollection.find({ name: itemName }, (error, result) => {
             if (error) throw error;
             // return item
             response.json(result);
         });
     });
+
+    //toimii int-muotoisella parametrilla
+    /*server.get("/ids", (request, response) => {
+        const itemName = request.query.id;
+        console.log(itemName);
+        let thingId = parseInt(itemName);
+        dbCollection.findOne({ id: thingId }, (error, result) => {
+            if (error) throw error;
+            // return item
+            response.json(result);
+
+        });
+    });*/
 
     server.get("/items", (request, response) => {
         // return updated list

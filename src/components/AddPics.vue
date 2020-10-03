@@ -5,7 +5,7 @@
         </p>
         <div id="pic-form" @submit.prevent="addPic">
             <form>
-               <label>How do you description cuteness of the animal</label>
+               <label>What is the cuteness level of the animal?</label>
               <input type="radio" id="adorable" value="Adorable" v-model="cuteness">
               <label for="adorable">Adorable</label>
               <input type="radio" id="lovely" value="Lovely" v-model="cuteness">
@@ -16,9 +16,9 @@
               <label for="incredible">Incredible</label>
               <input type="radio" id="chuckNorris" value="ChuckNorris" v-model="cuteness">
               <label for="chuckNorris">Chuck Norris</label>
-                <label>Name</label>
+                <label>What kind of animal is it?</label>
                 <input v-model="name" type="text" />
-                <label>Address</label>
+                <label>The link</label>
                 <input v-model="address" type="text" />
               <td><img :src="address"/></td>
                 <button>Add Pic</button>
