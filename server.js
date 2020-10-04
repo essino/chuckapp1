@@ -114,6 +114,23 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
+    //cuteness-tason pävitys nimen perusteella
+    server.put("/updatingCuteness/:name/:cuteness/", (request, response) => {
+        const itemName = request.params.name;
+        const itemCuteness = request.params.cuteness;
+        console.log(itemName);
+        console.log(itemCuteness);
+
+        dbCollection.update({ name: itemName }, { $set: {cuteness: itemCuteness}}, {multi: true}, (error, result) => {
+            if (error) throw error;
+            // send back entire updated list, to make sure frontend data is up-to-date
+            dbCollection.find().toArray(function(_error, _result) {
+                if (_error) throw _error;
+                response.json(_result);
+            });
+        });
+    });
+
 }, function(err) { // failureCallback
     throw (err);
 });
