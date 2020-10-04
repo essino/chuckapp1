@@ -25,7 +25,7 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         console.log(result);
     });
 
-    server.post("/items", (request, response) => {
+    server.post("/items/", (request, response) => {
         const item = request.body;
         dbCollection.insertOne(item, (error, result) => { // callback of insertOne
             if (error) throw error;
@@ -94,6 +94,25 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
+    //nimen päivitys id:n perusteella
+    //jos id on int, se on muutettava sellaiseksi myös koodissa!
+    server.put("/updatingItems/:id/:name/", (request, response) => {
+        const itemId = parseInt(request.params.id);
+        const itemName = request.params.name;
+        console.log(itemName);
+        console.log(itemId);
+
+        //console.log("Editing item: ", itemId, " to be ", item);
+
+        dbCollection.update({ id: itemId }, { $set: {name: itemName}}, {multi: true}, (error, result) => {
+            if (error) throw error;
+            // send back entire updated list, to make sure frontend data is up-to-date
+            dbCollection.find().toArray(function(_error, _result) {
+                if (_error) throw _error;
+                response.json(_result);
+            });
+        });
+    });
 
 }, function(err) { // failureCallback
     throw (err);
