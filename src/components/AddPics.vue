@@ -5,22 +5,28 @@
         </p>
         <div id="pic-form" @submit.prevent="addPic">
             <form>
-               <label>What is the cuteness level of the animal?</label>
-              <input type="radio" id="adorable" value="Adorable" v-model="cuteness">
-              <label for="adorable">Adorable</label>
-              <input type="radio" id="lovely" value="Lovely" v-model="cuteness">
-              <label for="lovely">Lovely</label>
-              <input type="radio" id="supercute" value="Supercute" v-model="cuteness">
-              <label for="supercute">Supercute</label>
-              <input type="radio" id="incredible" value="Incredible" v-model="cuteness">
-              <label for="incredible">Incredible</label>
-              <input type="radio" id="chuckNorris" value="ChuckNorris" v-model="cuteness">
-              <label for="chuckNorris">Chuck Norris</label>
-                <label>What kind of animal is it?</label>
-                <input v-model="name" type="text" />
-                <label>The link</label>
-                <input v-model="address" type="text" />
-              <td><img :src="address"/></td>
+                <p>
+                    <label>What is the cuteness level of the animal?</label>
+                    <input type="radio" id="adorable" value="Adorable" v-model="cuteness">
+                    <label for="adorable">Adorable</label>
+                    <input type="radio" id="lovely" value="Lovely" v-model="cuteness">
+                    <label for="lovely">Lovely</label>
+                    <input type="radio" id="supercute" value="Supercute" v-model="cuteness">
+                    <label for="supercute">Supercute</label>
+                    <input type="radio" id="incredible" value="Incredible" v-model="cuteness">
+                    <label for="incredible">Incredible</label>
+                    <input type="radio" id="chuckNorris" value="ChuckNorris" v-model="cuteness">
+                    <label for="chuckNorris">Chuck Norris</label>
+                </p>
+                <p>
+                    <label>The animal's name</label>
+                    <input v-model="name" type="text" />
+                </p>
+                <p>
+                    <label>The link</label>
+                    <input v-model="address" type="text" />
+                </p>
+              <p><img :src="address" alt="This isn't your pic!"/></p>
                 <button>Add Pic</button>
             </form>
         </div>
@@ -67,5 +73,10 @@
 </script>
 
 <style scoped>
-
+label, input {
+    padding-right: 0.5em;
+}
+    img{
+        width: 10%;
+    }
 </style>
