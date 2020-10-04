@@ -37,8 +37,8 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //findOne tuntuu toimivan vain int-muotoisella parametrilla
-    /*server.get("/items/:id", (request, response) => {
+    //hakee id:llä
+    server.get("/items/:id", (request, response) => {
         const itemId = request.params.id;
         console.log(itemId);
         let sameId = parseInt(itemId);
@@ -47,18 +47,31 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
             // return item
             response.json(result);
         });
-    });*/
+    });
 
-    //ei toimi, siksikö, että on nimi on string?
-    server.get("/items/:name", (request, response) => {
+    //hakee ensimmäisen, jolla on se nimi; voisi muuttaa, että hakee kaikki sen nimiset
+    server.get("/names/:name", (request, response) => {
         const itemName = request.params.name;
         console.log(itemName);
-        dbCollection.find({ name: itemName }, (error, result) => {
+        dbCollection.findOne({ name: itemName }, (error, result) => {
             if (error) throw error;
             // return item
             response.json(result);
         });
     });
+
+    //hakee kaikki tietyn söpöys-luokan dokumentit
+    server.get("/cutenesses/:cuteness", (request, response) => {
+        const itemCuteness = request.params.cuteness;
+        console.log(itemCuteness);
+        dbCollection.find({ cuteness: itemCuteness }).toArray((error, result) => {
+            if (error) throw error;
+            // return item
+            response.json(result);
+        });
+    });
+
+    //dbCollection.find().toArray((error, result) => {
 
     //toimii int-muotoisella parametrilla
     /*server.get("/ids", (request, response) => {
