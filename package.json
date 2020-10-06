@@ -7,18 +7,19 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
-  }
-,
+  },
   "dependencies": {
     "axios": "^0.20.0",
     "body-parser": "latest",
     "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
     "express": "latest",
+    "material-icons": "^0.3.1",
     "mongodb": "^3.6.2",
     "mysql": "^2.18.1",
     "vue": "^2.6.11",
-    "vue-router": "^3.4.5"
+    "vue-router": "^3.4.5",
+    "vuesax": "^3.12.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

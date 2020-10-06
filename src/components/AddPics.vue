@@ -6,7 +6,9 @@
     <div id="pic-form" @submit.prevent="addPic">
       <form>
         <p>
-          <label>What is the cuteness level of the animal?</label>
+          <br>
+          <label><h2>What is the cuteness level of the animal?</h2></label>
+          <br>
           <input type="radio" id="adorable" value="Adorable" v-model="cuteness">
           <label for="adorable">Adorable</label>
           <input type="radio" id="lovely" value="Lovely" v-model="cuteness">

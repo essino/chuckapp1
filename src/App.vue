@@ -28,13 +28,44 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;;
+  font-size: large;
 
+}
+body, html {
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-  /*background-image: url("");*/
+  margin-top: 10px;
+
+  padding: 0;
+
+  width: 100%;
+  min-height: 100vh;
+}
+body {
+ background-image: url("http://www.zingerbugimages.com/backgrounds/purple_christmas_lights_out_of_focus_seamless_texture.jpg");
+
+}
+
+
+div{
+  background-color: darkorchid;
+  margin: 20px;
+  width: 70%;
+  margin: auto;
+
+
+
+
+
 
 
 }
+
+
+
+
+
+
+
 
 </style>
