@@ -14,6 +14,8 @@
             <p>http://localhost:4000/cutenesses/:cuteness</p>
             <p><b>To update the name of an animal with the id number, replace ":_id" with the id number and ":cuteness" with the category name and use "put" with:</b></p>
             <p>http://localhost:4000/updatingItems/:_id/:name/</p>
+            <p><b>To update the link of a pic with the id number, replace "value1" with the id number and "value2" with the new link and use "put" with:</b></p>
+            <p>http://localhost:4000/updatingLink?_id=value1&address=value2</p>
             <p><b>To update the category of an animal with the animal's name, replace ":name" with the animal's name and ":cuteness" with the category name and use "put" with:</b></p>
             <p>http://localhost:4000/updatingCuteness/:name/:cuteness/</p>
 

@@ -177,6 +177,24 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
+    //linkin päivitys id:n perusteella
+    server.put("/updatingLink", (request, response) => {
+        const itemId = request.query._id;
+        const itemAddress = request.query.address;
+        console.log(itemAddress);
+        console.log(itemId);
+        //esim http://localhost:4000/updatingLink?_id=5f7c4a411728214d28445e63&address=www.google.fi
+
+        dbCollection.update({ _id: new ObjectId(itemId) }, { $set: {address: itemAddress}},/* {multi: true},*/ (error, result) => {
+            if (error) throw error;
+            // send back entire updated list, to make sure frontend data is up-to-date
+            dbCollection.find().toArray(function(_error, _result) {
+                if (_error) throw _error;
+                response.json(_result);
+            });
+        });
+    });
+
 }, function(err) { // failureCallback
     throw (err);
 });
