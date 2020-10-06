@@ -1,5 +1,6 @@
 const MongoClient = require("mongodb").MongoClient;
 
+
 const dbConnectionUrl = "mongodb+srv://Anni:Auvo100@testailu.08h7w.mongodb.net/Kuvat?retryWrites=true&w=majority";
 
 function initialize(

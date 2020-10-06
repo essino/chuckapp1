@@ -10,6 +10,8 @@ const body_parser = require("body-parser");
 // parse JSON (application/json content-type)
 server.use(body_parser.json());
 
+const ObjectId = require('mongodb').ObjectID;
+
 const port = 4000;
 
 // << db setup >>
@@ -25,6 +27,7 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         console.log(result);
     });
 
+    //tallentaa uuden kuvan tietokantaan - vain frontista
     server.post("/items/", (request, response) => {
         const item = request.body;
         dbCollection.insertOne(item, (error, result) => { // callback of insertOne
@@ -37,8 +40,8 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //hakee id:llä
-    server.get("/items/:id", (request, response) => {
+    //hakee id:llä yhden kuvan
+    /*server.get("/items/:id", (request, response) => {
         const itemId = request.params.id;
         console.log(itemId);
         let sameId = parseInt(itemId);
@@ -47,13 +50,38 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
             // return item
             response.json(result);
         });
+    });*/
+
+    //hakee MongoDb:n id:llä yhden kuvan
+    server.get("/ids/:_id", (request, response) => {
+        const itemId = request.params._id;
+        console.log(itemId);
+        //let sameId = parseInt(itemId);
+        //itemId = new ObjectId(itemId);
+        //console.log(ObjectId(itemId));
+        dbCollection.findOne({ _id: new ObjectId(itemId) }, (error, result) => {
+            if (error) throw error;
+            // return item
+            response.json(result);
+        });
     });
 
-    //hakee ensimmäisen, jolla on se nimi; voisi muuttaa, että hakee kaikki sen nimiset
+    //hakee ensimmäisen, jolla on se nimi
     server.get("/names/:name", (request, response) => {
         const itemName = request.params.name;
         console.log(itemName);
         dbCollection.findOne({ name: itemName }, (error, result) => {
+            if (error) throw error;
+            // return item
+            response.json(result);
+        });
+    });
+
+    //hakee kaikki tietyn nimiset
+    server.get("/allnames/:name", (request, response) => {
+        const itemName = request.params.name;
+        console.log(itemName);
+        dbCollection.find({ name: itemName }).toArray((error, result) => {
             if (error) throw error;
             // return item
             response.json(result);
@@ -71,21 +99,7 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //dbCollection.find().toArray((error, result) => {
-
-    //toimii int-muotoisella parametrilla
-    /*server.get("/ids", (request, response) => {
-        const itemName = request.query.id;
-        console.log(itemName);
-        let thingId = parseInt(itemName);
-        dbCollection.findOne({ id: thingId }, (error, result) => {
-            if (error) throw error;
-            // return item
-            response.json(result);
-
-        });
-    });*/
-
+    //hakee kaikki kuvat
     server.get("/items", (request, response) => {
         // return updated list
         dbCollection.find().toArray((error, result) => {
@@ -96,7 +110,7 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
 
     //nimen päivitys id:n perusteella
     //jos id on int, se on muutettava sellaiseksi myös koodissa!
-    server.put("/updatingItems/:id/:name/", (request, response) => {
+    /*server.put("/updatingItems/:id/:name/", (request, response) => {
         const itemId = parseInt(request.params.id);
         const itemName = request.params.name;
         console.log(itemName);
@@ -105,6 +119,27 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         //console.log("Editing item: ", itemId, " to be ", item);
 
         dbCollection.update({ id: itemId }, { $set: {name: itemName}}, {multi: true}, (error, result) => {
+            if (error) throw error;
+            // send back entire updated list, to make sure frontend data is up-to-date
+            dbCollection.find().toArray(function(_error, _result) {
+                if (_error) throw _error;
+                response.json(_result);
+            });
+        });
+    });*/
+
+    //nimen päivitys id:n perusteella
+    //jos id on int, se on muutettava sellaiseksi myös koodissa!
+    server.put("/updatingItems/:_id/:name/", (request, response) => {
+        //const itemId = parseInt(request.params._id);
+        const itemId = request.params._id;
+        const itemName = request.params.name;
+        console.log(itemName);
+        console.log(itemId);
+
+        //console.log("Editing item: ", itemId, " to be ", item);
+
+        dbCollection.update({ _id: new ObjectId(itemId) }, { $set: {name: itemName}}, {multi: true}, (error, result) => {
             if (error) throw error;
             // send back entire updated list, to make sure frontend data is up-to-date
             dbCollection.find().toArray(function(_error, _result) {
