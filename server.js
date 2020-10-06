@@ -77,6 +77,17 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
+    //hakee randomin dokumentin tietokannasta
+    server.get("/random", (request, response) => {
+        //const itemName = request.params.name;
+        //console.log(itemName);
+        dbCollection.aggregate([{ $sample: {size: 1 } }]).toArray((error, result) => {
+            if (error) throw error;
+            // return item
+            response.json(result);
+        });
+    });
+
     //hakee kaikki tietyn nimiset
     server.get("/allnames/:name", (request, response) => {
         const itemName = request.params.name;

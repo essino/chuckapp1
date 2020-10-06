@@ -8,6 +8,8 @@
 
             <p><b>To get all pics of cute animals/Chuch Norris memes, use "get" with:</b></p>
             <p>http://localhost:4000/items</p>
+            <p><b>To get a random pic of cute animals/Chuch Norris meme, use "get" with:</b></p>
+            <p>http://localhost:4000/random</p>
             <p><b>To get all pics of one category, replace ":cuteness" with the category name and use "get" with:</b></p>
             <p>http://localhost:4000/cutenesses/:cuteness</p>
             <p><b>To update the name of an animal with the id number, replace ":_id" with the id number and ":cuteness" with the category name and use "put" with:</b></p>
