@@ -14,7 +14,7 @@
 </script>
 
 <style scoped>
-    #home{
+    /*#home{
       background-color: transparent;
 
     }
@@ -24,6 +24,6 @@
 
       width:800px;
       background-color: transparent;
-    }
+    }*/
 
 </style>

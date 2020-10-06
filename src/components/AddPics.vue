@@ -1,36 +1,39 @@
 <template>
   <div>
     <p class="homeText">
-      Add Pics
     </p>
     <div id="pic-form" @submit.prevent="addPic">
+      <br>
+      <h2>Add Pics</h2>
+      <br>
       <form>
         <p>
-          <br>
-          <label><h2>What is the cuteness level of the animal?</h2></label>
+          <label>What is the cuteness level of the animal? </label>
           <br>
           <input type="radio" id="adorable" value="Adorable" v-model="cuteness">
-          <label for="adorable">Adorable</label>
+          <label for="adorable">Adorable </label>
           <input type="radio" id="lovely" value="Lovely" v-model="cuteness">
-          <label for="lovely">Lovely</label>
+          <label for="lovely">Lovely </label>
           <input type="radio" id="supercute" value="Supercute" v-model="cuteness">
-          <label for="supercute">Supercute</label>
+          <label for="supercute">Supercute </label>
           <input type="radio" id="incredible" value="Incredible" v-model="cuteness">
-          <label for="incredible">Incredible</label>
+          <label for="incredible">Incredible </label>
           <input type="radio" id="chuckNorris" value="ChuckNorris" v-model="cuteness">
-          <label for="chuckNorris">Chuck Norris</label>
+          <label for="chuckNorris">Chuck Norris </label>
         </p>
         <p>
-          <label>The animal's name</label>
+          <label>The animal's name </label>
           <input v-model="name" type="text" />
         </p>
         <p>
-          <label>The link</label>
+          <label>The link </label>
           <input v-model="address" type="text" />
         </p>
-        <p><img :src="address" alt="This isn't cute pic!"/></p>
+        <p><img id="smallPic" :src="address" /></p>
         <button>Add Pic</button>
+
       </form>
+      <br>
     </div>
   </div>
 </template>
@@ -73,10 +76,11 @@ export default {
 </script>
 
 <style scoped>
+  /*
 label, input {
   padding-right: 0.5em;
 }
 img{
   width: 10%;
-}
+}*/
 </style>

@@ -2,9 +2,9 @@
   <div id="app">
     <h1>Cute animals feat. Chuck Norris</h1>
     <nav>
-      <router-link to='/'>Home</router-link>
-      <router-link to='/addpics'>Add Pics</router-link>
-      <router-link to='/showpics'>Show Pics</router-link>
+      <router-link to='/'>Home </router-link>
+      <router-link to='/addpics'>Add </router-link>
+      <router-link to='/showpics'>Show </router-link>
       <router-link to='/api'>API</router-link>
     </nav>
     <router-view />
@@ -24,42 +24,49 @@ export default {
 
 <style>
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;;
-  font-size: large;
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;;
+    font-size: large;
+    text-align: center;
 
-}
-body, html {
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 10px;
+    background-color: darkorchid;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    right: 15%;
+    /*bottom: 100px;*/
+    z-index: -1;
 
-  padding: 0;
+  }
 
-  width: 100%;
-  min-height: 100vh;
-}
-body {
- background-image: url("http://www.zingerbugimages.com/backgrounds/purple_christmas_lights_out_of_focus_seamless_texture.jpg");
+  img {
+    width: 70%;
+  }
 
-}
+  button {
+    background-color: white;
+  }
+
+  body {
+    background-image: url("http://www.zingerbugimages.com/backgrounds/purple_christmas_lights_out_of_focus_seamless_texture.jpg");
+  }
+
+  /*mitähän tämä tekee?*/
+  body, html {
+
+    color: #2c3e50;
+
+  }
+
+  #smallPic {
+    width: 20%;
+  }
 
 
-div{
-  background-color: darkorchid;
-  margin: 20px;
-  width: 70%;
-  margin: auto;
-
-
-
-
-
-
-
-}
 
 
 

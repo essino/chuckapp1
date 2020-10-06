@@ -1,23 +1,25 @@
 <template>
   <div>
 <br>
-    <h2>Searcsh pics by filter</h2>
+    <h2>Search pics by filter</h2>
+      <br>
     <div id="pic-form" @submit.prevent="showPics">
       <form>
         <p>
-          <label>What is the cuteness level of the animal?</label>
+          <label>Choose the cuteness level of the pics </label>
           <br>
           <input type="radio" id="adorable" value="Adorable" v-model="selectCuteness">
-          <label for="adorable">Adorable</label>
+          <label for="adorable">Adorable </label>
           <input type="radio" id="lovely" value="Lovely" v-model="selectCuteness">
-          <label for="lovely">Lovely</label>
+          <label for="lovely">Lovely </label>
           <input type="radio" id="supercute" value="Supercute" v-model="selectCuteness">
-          <label for="supercute">Supercute</label>
+          <label for="supercute">Supercute </label>
           <input type="radio" id="incredible" value="Incredible" v-model="selectCuteness">
-          <label for="incredible">Incredible</label>
+          <label for="incredible">Incredible </label>
           <input type="radio" id="chuckNorris" value="ChuckNorris" v-model="selectCuteness">
-          <label for="chuckNorris">Chuck Norris</label>
+          <label for="chuckNorris">Chuck Norris </label>
         </p>
+          <br>
         <button>Search Pics</button>
       </form>
     </div>
@@ -25,13 +27,15 @@
 
 
 
-<div>
-      <div  v-for="pic in pics" :key="pic.id">
-
-        <div id="picPic"><img :src="pic.address" /><br>{{ pic.id }}{{ pic.name }}</div>
-<br>
+    <div>
+      <div  v-for="pic in pics" :key="pic._id">
+          <div id="picPic">
+              <img :src="pic.address" />
+              <br>{{ pic._id }} {{ pic.name }}
+          </div>
+        <br>
       </div>
-  </div>
+    </div>
 
   </div>
 </template>
@@ -45,7 +49,7 @@ export default {
       selectCuteness: "",
       pics: [],
       pic: {
-        id: '',
+        _id: '',
         name: '',
         address: ''
       }
@@ -85,25 +89,22 @@ export default {
 </script>
 
 <style>
-
+/*
 #picPic{
 
   float: left;
   background-color: darkorchid;
   width: 500px;
-
-
-
-
-
 }
 
 img {
   height: auto;
-  max-width:500px;
-
+  width:500px;
+    background-color: darkorchid;
 }
-
-
+div {
+    background-color: darkorchid;
+}
+*/
 
 </style>

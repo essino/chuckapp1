@@ -104,9 +104,17 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         const itemCuteness = request.params.cuteness;
         console.log(itemCuteness);
         dbCollection.find({ cuteness: itemCuteness }).toArray((error, result) => {
-            if (error) throw error;
-            // return item
-            response.json(result);
+            if (error) {
+                console.log(error);
+                response.json(error);
+                throw error;
+            } else {
+                response.json(result);
+                console.log("Oh dear!");
+            }
+            /*if (error) throw error;
+            response.json(result);*/
+
         });
     });
 
@@ -151,13 +159,23 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         //console.log("Editing item: ", itemId, " to be ", item);
 
         dbCollection.update({ _id: new ObjectId(itemId) }, { $set: {name: itemName}}, {multi: true}, (error, result) => {
-            if (error) throw error;
-            // send back entire updated list, to make sure frontend data is up-to-date
-            dbCollection.find().toArray(function(_error, _result) {
-                if (_error) throw _error;
-                response.json(_result);
-            });
-        });
+            if (error) {
+                console.log("ERROR!1");
+                response.json("error1");
+                throw error;
+            } else {
+                // send back entire updated list, to make sure frontend data is up-to-date
+                dbCollection.find().toArray(function (_error, _result) {
+                    if (_error) {
+                        console.log("ERROR!2");
+                        response.json("error2");
+                        throw _error;
+                    } else {
+                        response.json(_result);
+                    }
+
+                });
+            }});
     });
 
     //cuteness-tason pävitys nimen perusteella
