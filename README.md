@@ -20,7 +20,7 @@ npm run build
 npm run lint
 ```
 
-###Server
+### Server
 ```
 Run server.js
 ```
