@@ -29,7 +29,7 @@ Run server.js
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-###API Documentation
+#API Documentation
 
 This is a cute description of how to get data from the Cute animals database.
 
