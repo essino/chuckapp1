@@ -33,6 +33,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 This is a cute description of how to get data from the Cute animals database.
 
+To add a pic of cute animals/Chuch Norris meme, use "post" with:
+
+http://localhost:4000/items
+
 To get all pics of cute animals/Chuch Norris memes, use "get" with:
 
 http://localhost:4000/items
