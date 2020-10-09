@@ -1,33 +1,38 @@
-
+/**Getting Express */
 const express = require("express");
 const server = express();
 
+/**Enabling CORS*/
 const cors = require('cors');
 server.use(cors());
 
+/**Getting bory-parser */
 const body_parser = require("body-parser");
 
-// parse JSON (application/json content-type)
+/**Parsing JSON (application/json content-type)*/
 server.use(body_parser.json());
 
+/**Enabling the use  of MongoDB id numbers */
 const ObjectId = require('mongodb').ObjectID;
 
+/**Creating the right port*/
 const port = 4000;
 
-// << db setup >>
+/** db setup */
 const db = require("./db");
 const dbName = "Kuvat";
 const collectionName = "Kuvat";
 
-// << db init >>
+/** db init */
 db.initialize(dbName, collectionName, function(dbCollection) { // successCallback
-    // get all items
     dbCollection.find().toArray(function(err, result) {
         if (err) throw err;
         console.log(result);
     });
 
-    //tallentaa uuden kuvan tietokantaan - vain frontista
+    /**CRUD requests */
+
+    /**API request to insert a new picture into the db, only available from the UI */
     server.post("/items/", (request, response) => {
         const item = request.body;
         dbCollection.insertOne(item, (error, result) => { // callback of insertOne
@@ -40,25 +45,10 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //hakee id:llä yhden kuvan
-    /*server.get("/items/:id", (request, response) => {
-        const itemId = request.params.id;
-        console.log(itemId);
-        let sameId = parseInt(itemId);
-        dbCollection.findOne({ id: sameId }, (error, result) => {
-            if (error) throw error;
-            // return item
-            response.json(result);
-        });
-    });*/
-
-    //hakee MongoDb:n id:llä yhden kuvan
+    /**API request to get one picture from the db with the MongoDB id number */
     server.get("/ids/:_id", (request, response) => {
         const itemId = request.params._id;
         console.log(itemId);
-        //let sameId = parseInt(itemId);
-        //itemId = new ObjectId(itemId);
-        //console.log(ObjectId(itemId));
         dbCollection.findOne({ _id: new ObjectId(itemId) }, (error, result) => {
             if (error) throw error;
             // return item
@@ -66,7 +56,7 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //hakee ensimmäisen, jolla on se nimi
+    /**API request to get the first picture from the db with the specified name */
     server.get("/names/:name", (request, response) => {
         const itemName = request.params.name;
         console.log(itemName);
@@ -77,7 +67,7 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //hakee randomin dokumentin tietokannasta
+    /**API request to get a picture from the db */
     server.get("/random", (request, response) => {
         //const itemName = request.params.name;
         //console.log(itemName);
@@ -88,7 +78,7 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //hakee kaikki tietyn nimiset
+    /**API request to get all pictures from the db with the specified name*/
     server.get("/allnames/:name", (request, response) => {
         const itemName = request.params.name;
         console.log(itemName);
@@ -99,7 +89,7 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //hakee kaikki tietyn söpöys-luokan dokumentit
+    /**API request to get all pictures from the db with the specified cuteness class*/
     server.get("/cutenesses/:cuteness", (request, response) => {
         const itemCuteness = request.params.cuteness;
         console.log(itemCuteness);
@@ -110,15 +100,13 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
                 throw error;
             } else {
                 response.json(result);
-                console.log("Oh dear!");
+                //console.log("Success");
             }
-            /*if (error) throw error;
-            response.json(result);*/
 
         });
     });
 
-    //hakee kaikki kuvat
+    /**API request to get all pictures from the db*/
     server.get("/items", (request, response) => {
         // return updated list
         dbCollection.find().toArray((error, result) => {
@@ -127,37 +115,13 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //nimen päivitys id:n perusteella
-    //jos id on int, se on muutettava sellaiseksi myös koodissa!
-    /*server.put("/updatingItems/:id/:name/", (request, response) => {
-        const itemId = parseInt(request.params.id);
-        const itemName = request.params.name;
-        console.log(itemName);
-        console.log(itemId);
-
-        //console.log("Editing item: ", itemId, " to be ", item);
-
-        dbCollection.update({ id: itemId }, { $set: {name: itemName}}, {multi: true}, (error, result) => {
-            if (error) throw error;
-            // send back entire updated list, to make sure frontend data is up-to-date
-            dbCollection.find().toArray(function(_error, _result) {
-                if (_error) throw _error;
-                response.json(_result);
-            });
-        });
-    });*/
-
-    //nimen päivitys id:n perusteella
-    //jos id on int, se on muutettava sellaiseksi myös koodissa!
+    /**Editing a document's name with the id number */
     server.put("/updatingItems/:_id/:name/", (request, response) => {
         //const itemId = parseInt(request.params._id);
         const itemId = request.params._id;
         const itemName = request.params.name;
         console.log(itemName);
         console.log(itemId);
-
-        //console.log("Editing item: ", itemId, " to be ", item);
-
         dbCollection.update({ _id: new ObjectId(itemId) }, { $set: {name: itemName}}, {multi: true}, (error, result) => {
             if (error) {
                 console.log("ERROR!1");
@@ -173,12 +137,11 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
                     } else {
                         response.json(_result);
                     }
-
                 });
             }});
     });
 
-    //cuteness-tason pävitys nimen perusteella
+    /**Editing a document's cuteness level with the name */
     server.put("/updatingCuteness/:name/:cuteness/", (request, response) => {
         const itemName = request.params.name;
         const itemCuteness = request.params.cuteness;
@@ -195,14 +158,13 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
         });
     });
 
-    //linkin päivitys id:n perusteella
+    /**Editing a document's address with the id number */
     server.put("/updatingLink", (request, response) => {
         const itemId = request.query._id;
         const itemAddress = request.query.address;
         console.log(itemAddress);
         console.log(itemId);
-        //esim http://localhost:4000/updatingLink?_id=5f7c4a411728214d28445e63&address=www.google.fi
-
+        //e.g. http://localhost:4000/updatingLink?_id=5f7c4a411728214d28445e63&address=www.google.fi
         dbCollection.update({ _id: new ObjectId(itemId) }, { $set: {address: itemAddress}},/* {multi: true},*/ (error, result) => {
             if (error) throw error;
             // send back entire updated list, to make sure frontend data is up-to-date
@@ -217,9 +179,7 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
     throw (err);
 });
 
-
-
-
+/**Listening to port */
 server.listen(port, () => {
     console.log(`Server listening at ${port}`);
 });

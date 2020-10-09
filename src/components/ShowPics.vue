@@ -3,7 +3,9 @@
 <br>
     <h2>Search pics by filter</h2>
       <br>
+
     <div id="pic-form" @submit.prevent="showPics">
+        <!-- A form with which the UI user can filter the pics-->
       <form>
         <p>
           <label>Choose the cuteness level of the pics </label>
@@ -25,8 +27,7 @@
     </div>
     <br>
 
-
-
+    <!-- Shows the pictures with their id numbers and names-->
     <div>
       <div  v-for="pic in pics" :key="pic._id">
           <div id="picPic">
@@ -41,7 +42,9 @@
 </template>
 
 <script>
+    /**getting axios to use with the REST API requests */
 import axios from 'axios';
+/** Declaring components */
 export default {
   name: "ShowPics",
   data() {
@@ -55,56 +58,31 @@ export default {
       }
     }
   },
+    /**API call to get all the items from the database */
   async created() {
     {
-      console.log(this.selectCuteness);
       try {
-        console.log(this.selectCuteness);
         {
           const promise = await axios.get('http://localhost:4000/items/');
-          //const promise = await axios.get('https://my-json-server.typicode.com/essino/fakedb/events1');
           this.pics = promise.data;
-        }/*else {
-                const promise =  axios.get('http://localhost:4000/cutenesses/' + this.selectCuteness);
-                //const promise = await axios.get('https://my-json-server.typicode.com/essino/fakedb/events1');
-                console.log("Menen tänne vaikka ei pitäisi")
-                this.pics = promise.data;
-              }*/
+        }
       } catch (e) {
         console.error(e)
       }
     }
   },
+    /**API call to get the filtered items from the database */
   methods: {
     async showPics() {
       {
         const promise = await axios.get('http://localhost:4000/cutenesses/' + this.selectCuteness);
-        //const promise = await axios.get('https://my-json-server.typicode.com/essino/fakedb/events1');
         this.pics = promise.data;
       }
     }
-    //}
   }
 }
 </script>
 
 <style>
-/*
-#picPic{
-
-  float: left;
-  background-color: darkorchid;
-  width: 500px;
-}
-
-img {
-  height: auto;
-  width:500px;
-    background-color: darkorchid;
-}
-div {
-    background-color: darkorchid;
-}
-*/
 
 </style>

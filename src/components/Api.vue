@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!--The page only consists of text documenting the REST API calls available. -->
       <br>
         <div>
           <h2>API Documentation</h2>
@@ -15,7 +16,7 @@
             <p>http://localhost:4000/random</p>
             <p><b>To get all pics of one category, replace ":cuteness" with the category name and use "get" with:</b></p>
             <p>http://localhost:4000/cutenesses/:cuteness</p>
-            <p><b>To update the name of an animal with the id number, replace ":_id" with the id number and ":cuteness" with the category name and use "put" with:</b></p>
+            <p><b>To update the name of an animal with the id number, replace ":_id" with the id number and ":name" with the name and use "put" with:</b></p>
             <p>http://localhost:4000/updatingItems/:_id/:name/</p>
             <p><b>To update the link of a pic with the id number, replace "value1" with the id number and "value2" with the new link and use "put" with:</b></p>
             <p>http://localhost:4000/updatingLink?_id=value1&address=value2</p>
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+    /**Declaring the component*/
     export default {
         name: "Api"
     }

@@ -27,9 +27,19 @@
         </p>
         <p>
           <label>The link </label>
-          <input v-model="address" type="text" />
+          <input
+                  v-model="address"
+                  type="text"
+                  :class="{ 'has-error': submitting && invalidAddress}"
+                  @focus="clearStatus"
+                  @keypress="clearStatus"
+          />
         </p>
         <p><img id="smallPic" :src="address" /></p>
+
+        <p v-if="error && submitting" class="error-message">
+          There is no link :(
+        </p>
         <button>Add Pic</button>
 
       </form>
@@ -46,6 +56,9 @@ export default {
   name: "AddPics",
   data() {
     return {
+      submitting: false,
+      error: false,
+      success: false,
       cuteness: '',
       name: '',
       address: '',
@@ -56,8 +69,19 @@ export default {
       }
     }
   },
+  computed: {
+    invalidAddress(){
+      return this.address === ''
+    },
+  },
   methods: {
     addPic(){
+      this.clearStatus()
+      this.submitting = true
+      if (this.invalidAddress) {
+        this.error = true
+        return
+      }
       this.newPic.cuteness = this.cuteness;
       this.newPic.name = this.name;
       this.newPic.address = this.address;
@@ -70,6 +94,13 @@ export default {
                 this.address = '';
               }
           )
+      this.error = false
+      this.success = true
+      this.submitting = false
+    },
+    clearStatus(){
+      this.sucess = false
+      this.error = false
     }
   }
 }
