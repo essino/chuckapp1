@@ -1,4 +1,6 @@
 <template>
+
+  <!--front page of application-->
     <div id="home">
 
         <div>
@@ -14,16 +16,5 @@
 </script>
 
 <style scoped>
-    /*#home{
-      background-color: transparent;
-
-    }
-
-    #miska{
-        text-align: center;
-
-      width:800px;
-      background-color: transparent;
-    }*/
 
 </style>

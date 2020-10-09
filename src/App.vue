@@ -1,4 +1,5 @@
 <template>
+  <!--menu bar with links-->
   <div id="app">
     <h1>Cute animals feat. Chuck Norris</h1>
     <nav>
@@ -13,7 +14,6 @@
 
 <script>
 
-//npm run serve -- --port 3000
 export default {
   name: 'App',
   components: {
@@ -38,7 +38,6 @@ export default {
     top: 5%;
     left: 15%;
     right: 15%;
-    /*bottom: 100px;*/
     z-index: -1;
 
   }
@@ -55,24 +54,12 @@ export default {
     background-image: url("http://www.zingerbugimages.com/backgrounds/purple_christmas_lights_out_of_focus_seamless_texture.jpg");
   }
 
-  /*mitähän tämä tekee?*/
   body, html {
-
     color: #2c3e50;
-
   }
 
   #smallPic {
     width: 20%;
   }
-
-
-
-
-
-
-
-
-
 
 </style>

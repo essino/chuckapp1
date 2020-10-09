@@ -6,12 +6,16 @@ import Vuesax from 'vuesax'
 import 'material-icons/iconfont/material-icons.css';
 
 import 'vuesax/dist/vuesax.css'
+/*intialise root component into to element*/
+
 Vue.use(Vuesax)
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
 const router = new VueRouter({routes});
+
+/**add plungins in to app**/
 
 new Vue({
   router,

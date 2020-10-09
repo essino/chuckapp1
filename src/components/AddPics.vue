@@ -27,6 +27,7 @@
         </p>
         <p>
           <label>The link </label>
+
           <input
                   v-model="address"
                   type="text"
@@ -35,8 +36,9 @@
                   @keypress="clearStatus"
           />
         </p>
+        <!--previw for image-->
         <p><img id="smallPic" :src="address" /></p>
-
+        <!--area for error-messages if web address is too short-->
         <p v-if="error && submitting" class="error-message">
           There is no link :(
         </p>
@@ -76,16 +78,17 @@ export default {
   },
   methods: {
     addPic(){
+      /*validator for address leght*/
       this.clearStatus()
       this.submitting = true
       if (this.invalidAddress) {
         this.error = true
         return
       }
+      /*add data to database*/
       this.newPic.cuteness = this.cuteness;
       this.newPic.name = this.name;
       this.newPic.address = this.address;
-      //this.newTask.done = Boolean(JSON.parse(this.picked));
       axios.post('http://localhost:4000/items', this.newPic)
           .then(res => {
                 console.log(res);
@@ -107,11 +110,4 @@ export default {
 </script>
 
 <style scoped>
-  /*
-label, input {
-  padding-right: 0.5em;
-}
-img{
-  width: 10%;
-}*/
 </style>
